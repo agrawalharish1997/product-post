@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block body_block %}
+<div class="container">
+  <div class="jumbotron">
+    <h1>Welcome to the project!</h1>
+    {% if user.is_authenticated %}
+        <h2>Hello {{ user.username }}</h2>
+    {% else %}
+        <h2>Register or Login if you'd like to</h2>
+    {% endif %}
+  </div>
+</div>
+
+<div class=container>
+  {%for prod in prod%}
+    <div>
+      <h2 id='name'>Name-{{prod.name}}</h2>
+      <h4 id='weight'>Weight-{{prod.weight}} gm</h4>
+      <h3 id='updated'>Updated At {{prod.updated_at}}</h3>
+    </div>
+    <div>
+      <h3 id='price'>Price-{{prod.price}}</h3>
+      <h4>Created At {{prod.created_at}}</h4>
+    </div>
+    {%endfor%}
+</div><br><br>
+
+
+
+<div class=container>
+  <form method='POST' action='pos'>
+    {%csrf_token%}
+    <div>
+      Text-<input type='text' name='text'><br>
+      Update Date-<input type='text' name='updated'><br>
+      created  Date-<input type='text' name='created'><br>
+    </div>
+    <input type='submit' value='send'>
+  </form>
+</div><br><br><br><br>
+
+<div class=container>
+  {%for post1 in post1%}
+    <div>
+      <h2 id='name'>Name-{{ user.username }}</h2>
+      <h4 id='weight'>{{post1.text}} </h4>
+      <h3 id='updated'>Updated At {{post1.updated}}</h3> 
+    </div>
+    <div>
+      <h4>Created At {{post1.created}}</h4>
+    </div>
+    {%endfor%}
+</div>
+{% endblock %}
